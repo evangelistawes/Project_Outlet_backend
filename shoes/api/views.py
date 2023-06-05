@@ -3,11 +3,14 @@ from shoes.api.serializer import ShoesSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+# from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ShoesViewSet(viewsets.ModelViewSet):
     queryset = Shoes.objects.all()
     serializer_class = ShoesSerializer
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ('gender',)
 
     @action(methods=['POST'], detail=False)
     def create_shoes(self,request):
