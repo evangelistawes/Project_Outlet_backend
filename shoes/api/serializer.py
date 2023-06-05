@@ -5,7 +5,8 @@ from shoes.models import Shoes
 class ShoesSerializer(serializers.ModelSerializer):
     good_avaliations = serializers.SerializerMethodField()
     bad_avaliations = serializers.SerializerMethodField()
-
+    photo = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
+        
     class Meta:
         model = Shoes
         fields= '__all__'
