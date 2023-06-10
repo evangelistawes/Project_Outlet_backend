@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from shoes.models import Shoes
+from rating.api.serializer import RatingSerializer
 
 
 class ShoesSerializer(serializers.ModelSerializer):
+    ratings = RatingSerializer(
+        source='rating_set', many=True, required=False)
     good_avaliations = serializers.SerializerMethodField()
     bad_avaliations = serializers.SerializerMethodField()
     photo = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
@@ -10,7 +13,6 @@ class ShoesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shoes
         fields= '__all__'
-
 
     def get_good_avaliations(self,obj):
         avaliations=obj.rating_set.all()
